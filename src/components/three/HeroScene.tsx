@@ -21,6 +21,63 @@ import * as THREE from "three";
 const SIGNAL = "#ff4d00";
 const BONE = "#e9e6df";
 
+/** How fast the gradient sweeps around the ring / cycles through the light (cycles per second). */
+const CYCLE_SPEED = 0.06;
+
+/**
+ * Curated 4-stop palette the ring gradient and rim light both cycle through,
+ * starting from the brand signal orange. Kept in JS (for the light) and
+ * mirrored as floats in the ring shader below — GLSL can't import this array.
+ */
+const PALETTE = [
+  new THREE.Color("#ff4d00"), // signal orange
+  new THREE.Color("#ffb020"), // amber
+  new THREE.Color("#ff2ea6"), // magenta
+  new THREE.Color("#2e6bff"), // electric blue
+];
+
+function paletteColor(t: number, target: THREE.Color) {
+  const scaled = THREE.MathUtils.euclideanModulo(t, 1) * PALETTE.length;
+  const i = Math.floor(scaled);
+  const a = PALETTE[i];
+  const b = PALETTE[(i + 1) % PALETTE.length];
+  return target.copy(a).lerp(b, scaled - i);
+}
+
+const RING_VERTEX_SHADER = /* glsl */ `
+  varying vec2 vUv;
+  void main() {
+    vUv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`;
+
+const RING_FRAGMENT_SHADER = /* glsl */ `
+  varying vec2 vUv;
+  uniform float uTime;
+  uniform float uOpacity;
+
+  vec3 palette(float t) {
+    vec3 c0 = vec3(1.000, 0.302, 0.000); // signal orange
+    vec3 c1 = vec3(1.000, 0.690, 0.125); // amber
+    vec3 c2 = vec3(1.000, 0.180, 0.651); // magenta
+    vec3 c3 = vec3(0.180, 0.420, 1.000); // electric blue
+
+    float scaled = fract(t) * 4.0;
+    float i = floor(scaled);
+    float f = smoothstep(0.0, 1.0, fract(scaled));
+
+    vec3 a = i < 1.0 ? c0 : i < 2.0 ? c1 : i < 3.0 ? c2 : c3;
+    vec3 b = i < 1.0 ? c1 : i < 2.0 ? c2 : i < 3.0 ? c3 : c0;
+    return mix(a, b, f);
+  }
+
+  void main() {
+    vec3 color = palette(vUv.x + uTime * ${CYCLE_SPEED.toFixed(3)});
+    gl_FragColor = vec4(color, uOpacity);
+  }
+`;
+
 /** Damped mouse-parallax wrapper — the only pointer-reactive node. */
 function Rig({ children }: { children: React.ReactNode }) {
   const group = useRef<THREE.Group>(null);
@@ -48,6 +105,11 @@ function Core() {
   const core = useRef<THREE.Mesh>(null);
   const ringA = useRef<THREE.Mesh>(null);
   const ringB = useRef<THREE.Mesh>(null);
+  const ringMaterial = useRef<THREE.ShaderMaterial>(null);
+  const ringUniforms = useMemo(
+    () => ({ uTime: { value: 0 }, uOpacity: { value: 0.9 } }),
+    []
+  );
 
   useFrame((_, delta) => {
     if (shell.current) {
@@ -57,6 +119,7 @@ function Core() {
     if (core.current) core.current.rotation.y -= delta * 0.12;
     if (ringA.current) ringA.current.rotation.z += delta * 0.05;
     if (ringB.current) ringB.current.rotation.z -= delta * 0.04;
+    if (ringMaterial.current) ringMaterial.current.uniforms.uTime.value += delta;
   });
 
   return (
@@ -83,10 +146,16 @@ function Core() {
         />
       </mesh>
 
-      {/* Orbit ring — signal */}
+      {/* Orbit ring — living gradient sweeping orange → amber → magenta → blue */}
       <mesh ref={ringA} rotation={[Math.PI / 2.6, 0.4, 0]}>
         <torusGeometry args={[3.4, 0.008, 6, 96]} />
-        <meshBasicMaterial color={SIGNAL} transparent opacity={0.85} />
+        <shaderMaterial
+          ref={ringMaterial}
+          transparent
+          uniforms={ringUniforms}
+          vertexShader={RING_VERTEX_SHADER}
+          fragmentShader={RING_FRAGMENT_SHADER}
+        />
       </mesh>
 
       {/* Orbit ring — dim counterweight */}
@@ -96,6 +165,21 @@ function Core() {
       </mesh>
     </group>
   );
+}
+
+/** Rim light that cycles through the same palette as the orbit ring, so the whole scene breathes as one. */
+function SignalLight() {
+  const light = useRef<THREE.PointLight>(null);
+  const color = useMemo(() => new THREE.Color(), []);
+
+  useFrame((state) => {
+    if (!light.current) return;
+    light.current.color.copy(
+      paletteColor(state.clock.elapsedTime * CYCLE_SPEED, color)
+    );
+  });
+
+  return <pointLight ref={light} position={[-6, -3, -2]} intensity={14} />;
 }
 
 /** Sparse particle shell (radius 4.5–7.5) for parallax depth. */
@@ -152,8 +236,8 @@ export default function HeroScene() {
     >
       <ambientLight intensity={0.35} />
       <directionalLight position={[4, 6, 3]} intensity={1.1} />
-      {/* Signal-colored rim light from below-left */}
-      <pointLight position={[-6, -3, -2]} intensity={14} color={SIGNAL} />
+      {/* Palette-cycling rim light from below-left, synced with the ring gradient */}
+      <SignalLight />
       <Rig>
         <Core />
         <Particles count={isMobile ? 220 : 450} />
