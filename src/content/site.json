@@ -3,7 +3,8 @@
   "brandMark": "BASANTA PARAJULI",
   "role": "Creative Strategist & Growth Partner",
   "location": "Working worldwide — fully remote",
-  "email": "basantaparajuli.6969@gmail.com",
+  "email": "basantaparajuli.11@gmail.com",
+  "calendly": "https://calendly.com/basantaparajuli-11/30min",
   "availability": "Accepting 2 new growth partners",
   "nav": [
     { "label": "Work", "href": "#work" },
@@ -11,13 +12,22 @@
     { "label": "Packages", "href": "#packages" },
     { "label": "Contact", "href": "#contact" }
   ],
+  "navCta": {
+    "label": "Book a call",
+    "href": "https://calendly.com/basantaparajuli-11/30min",
+    "external": true
+  },
   "hero": {
     "kicker": "Creative Strategist / Growth Partner",
     "headline": ["Growth is not luck.", "It's produced."],
     "accentWordIndex": 1,
     "subline": "I partner with brands and founders to scale revenue through cinematic short-form, long-form, and ad creative — content engineered to convert, not to decorate.",
-    "primaryCta": { "label": "Start a project", "href": "#contact" },
-    "secondaryCta": { "label": "See the work", "href": "#work" },
+    "primaryCta": {
+      "label": "Book a call",
+      "href": "https://calendly.com/basantaparajuli-11/30min",
+      "external": true
+    },
+    "secondaryCta": { "label": "See the work", "href": "#work", "external": false },
     "stats": [
       { "value": "12–15", "label": "Reels shipped / month" },
       { "value": "48H", "label": "Average turnaround" },
@@ -27,15 +37,35 @@
   },
   "contact": {
     "headline": ["Make your competition", "nervous."],
-    "subline": "Tell me what you sell and where it needs to go. I reply within 24 hours with a straight answer — no discovery-call theatre.",
+    "subline": "Skip the form if you want — book a call or DM me directly. Either way, you get a straight answer within 24 hours. No discovery-call theatre.",
+    "channels": [
+      {
+        "label": "Book a 30-min call",
+        "note": "Fastest route — pick a slot, we talk strategy",
+        "href": "https://calendly.com/basantaparajuli-11/30min",
+        "primary": true
+      },
+      {
+        "label": "DM on Instagram",
+        "note": "@fusion.basanta — replies daily",
+        "href": "https://www.instagram.com/fusion.basanta/",
+        "primary": false
+      },
+      {
+        "label": "Email direct",
+        "note": "basantaparajuli.11@gmail.com",
+        "href": "mailto:basantaparajuli.11@gmail.com",
+        "primary": false
+      }
+    ],
     "budgetOptions": ["$500 – $700 / mo", "$700 – $1,500 / mo", "$1,500+ / mo", "One-off campaign"]
   },
   "footer": {
     "note": "Built to convert. No templates were harmed.",
     "socials": [
-      { "label": "Instagram", "href": "https://instagram.com/" },
-      { "label": "LinkedIn", "href": "https://linkedin.com/" },
-      { "label": "WhatsApp", "href": "https://wa.me/" }
+      { "label": "Instagram", "href": "https://www.instagram.com/fusion.basanta/" },
+      { "label": "Facebook", "href": "https://www.facebook.com/basantalovesjs" },
+      { "label": "Calendly", "href": "https://calendly.com/basantaparajuli-11/30min" }
     ]
   }
 }

@@ -36,10 +36,12 @@ export default function Nav() {
             <span className="type-label text-dim">{site.availability}</span>
           </span>
           <a
-            href="#contact"
+            href={site.navCta.href}
+            target={site.navCta.external ? "_blank" : undefined}
+            rel={site.navCta.external ? "noopener noreferrer" : undefined}
             className="type-label rounded-full border border-line px-4 py-2 text-bone transition-colors duration-300 hover:border-signal hover:text-signal"
           >
-            Start a project
+            {site.navCta.label} ↗
           </a>
         </div>
       </div>

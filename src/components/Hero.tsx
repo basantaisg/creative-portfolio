@@ -67,6 +67,8 @@ export default function Hero() {
           <div className="flex shrink-0 gap-3">
             <a
               href={hero.primaryCta.href}
+              target={hero.primaryCta.external ? "_blank" : undefined}
+              rel={hero.primaryCta.external ? "noopener noreferrer" : undefined}
               className="type-label rounded-full bg-signal px-7 py-4 text-ink transition-colors duration-300 hover:bg-bone"
             >
               {hero.primaryCta.label} ↗

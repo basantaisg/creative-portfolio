@@ -73,14 +73,43 @@ export default function Contact() {
               ))}
             </h3>
 
-            <div className="mt-12 flex flex-col gap-4">
-              <a
-                href={`mailto:${site.email}`}
-                className="type-label w-fit border-b border-line pb-1 text-bone transition-colors hover:border-signal hover:text-signal"
-              >
-                {site.email}
-              </a>
-              <p className="flex items-center gap-2">
+            {/* Direct lines — reach out without the form.
+                Rows come from content/site.json → contact.channels */}
+            <div className="mt-12 border-t border-line">
+              {contact.channels.map((channel, i) => (
+                <a
+                  key={channel.label}
+                  href={channel.href}
+                  target={channel.href.startsWith("http") ? "_blank" : undefined}
+                  rel={
+                    channel.href.startsWith("http")
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
+                  className="group flex items-center justify-between gap-4 border-b border-line py-5 transition-colors duration-300 hover:bg-panel md:px-3"
+                >
+                  <div className="flex items-baseline gap-4">
+                    <span className="type-label text-signal">
+                      0{i + 1}
+                    </span>
+                    <div>
+                      <p
+                        className={`type-display text-lg md:text-xl ${
+                          channel.primary ? "text-signal" : "text-bone"
+                        }`}
+                      >
+                        {channel.label}
+                      </p>
+                      <p className="type-label mt-1 text-dim">{channel.note}</p>
+                    </div>
+                  </div>
+                  <span className="text-dim transition-all duration-300 group-hover:translate-x-1 group-hover:text-signal">
+                    ↗
+                  </span>
+                </a>
+              ))}
+
+              <p className="mt-6 flex items-center gap-2">
                 <span className="h-1.5 w-1.5 bg-signal animate-signal" />
                 <span className="type-label text-dim">{site.availability}</span>
               </p>
