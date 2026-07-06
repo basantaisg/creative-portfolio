@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/*  DESIGN TOKENS — the entire visual system lives here.               */
+/*  Change a value once, it propagates everywhere.                     */
+/* ------------------------------------------------------------------ */
+@theme inline {
+  /* Surfaces */
+  --color-ink: #0a0a09; /* page background */
+  --color-panel: #121210; /* raised cards / panels */
+  --color-well: #060606; /* recessed areas (video slots) */
+
+  /* Type */
+  --color-bone: #e9e6df; /* primary text */
+  --color-dim: #8b877c; /* secondary text */
+
+  /* The one accent. Used sparingly — that's what makes it hit. */
+  --color-signal: #ff4d00;
+
+  /* Hairlines */
+  --color-line: rgba(233, 230, 223, 0.14);
+  --color-line-soft: rgba(233, 230, 223, 0.07);
+
+  /* Fonts (wired up via next/font in layout.tsx) */
+  --font-display: var(--font-bricolage);
+  --font-body: var(--font-figtree);
+  --font-serif: var(--font-instrument);
+  --font-mono: var(--font-plex-mono);
+}
+
+/* ------------------------------------------------------------------ */
+/*  BASE                                                                */
+/* ------------------------------------------------------------------ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-bone);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Native cursor is replaced by <CustomCursor /> on precise pointers.
+   Form fields keep their text caret cursor for usability. */
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  a,
+  button,
+  select {
+    cursor: none;
+  }
+}
+
+::selection {
+  background: var(--color-signal);
+  color: var(--color-ink);
+}
+
+/* Thin minimal scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-signal);
+}
+
+/* ------------------------------------------------------------------ */
+/*  SYSTEM UTILITIES                                                    */
+/* ------------------------------------------------------------------ */
+
+/* Display type: tight, confident, sentence-case */
+.type-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+/* Serif italic accent — emphasis words inside display headlines */
+.type-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Mono system labels: [ WORK ], 01 /, prices, etc. */
+.type-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+/* Film-grain overlay (pure CSS data-URI, zero network requests) */
+.noise::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Pulsing availability dot */
+@keyframes signal-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+.animate-signal {
+  animation: signal-pulse 1.6s ease-in-out infinite;
+}

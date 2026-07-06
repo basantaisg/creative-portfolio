@@ -1,0 +1,65 @@
+{
+  "sectionKicker": "Selected Work",
+  "sectionTitle": "Case studies.",
+  "sectionNote": "Cinematic media with a job to do. Every piece below was built against a business objective — awareness, bookings, or authority.",
+  "items": [
+    {
+      "id": "bardali-cafe",
+      "client": "Bardali Cafe",
+      "objective": "Brand Awareness",
+      "year": "2026",
+      "size": "large",
+      "description": "A cinematic brand-film and reel system that turned a neighborhood cafe into the place everyone had already seen online before they ever walked in.",
+      "deliverables": ["Brand film", "Reel system", "Scripting"],
+      "metrics": [
+        { "value": "—", "label": "Organic reach" },
+        { "value": "—", "label": "Follower growth" }
+      ],
+      "videoUrl": "",
+      "videoPoster": ""
+    },
+    {
+      "id": "tersatar-futsal",
+      "client": "Tersatar Futsal",
+      "objective": "Booking Conversions",
+      "year": "2026",
+      "size": "large",
+      "description": "Direct-response reels engineered for one metric: booked court hours. Hook, proof, offer, book — no wasted frames.",
+      "deliverables": ["DR reels", "Offer scripting", "Booking funnel"],
+      "metrics": [
+        { "value": "—", "label": "Booking lift" },
+        { "value": "—", "label": "Cost per booking" }
+      ],
+      "videoUrl": "",
+      "videoPoster": ""
+    },
+    {
+      "id": "talking-head-series",
+      "client": "Talking-Head Series",
+      "objective": "Authority Building",
+      "year": "2026",
+      "size": "small",
+      "description": "Founder-led talking-head episodes cut for retention — pattern interrupts, captions, and pacing that keep watch time up.",
+      "deliverables": ["Direction", "Edit system", "Captions"],
+      "metrics": [
+        { "value": "—", "label": "Avg. watch time" }
+      ],
+      "videoUrl": "",
+      "videoPoster": ""
+    },
+    {
+      "id": "ai-cinematic-spot",
+      "client": "AI Cinematic Spot",
+      "objective": "Product Launch",
+      "year": "2026",
+      "size": "small",
+      "description": "Fully AI-generated cinematic ad spot — impossible shots on a real-world budget, graded to sit next to broadcast work.",
+      "deliverables": ["AI generation", "Sound design", "Grade"],
+      "metrics": [
+        { "value": "—", "label": "Production cost saved" }
+      ],
+      "videoUrl": "",
+      "videoPoster": ""
+    }
+  ]
+}

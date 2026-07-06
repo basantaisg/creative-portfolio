@@ -1,0 +1,63 @@
+{
+  "sectionKicker": "Engagement Models",
+  "sectionTitle": "Pick your lane.",
+  "sectionNote": "Two ways to work with me. One gets you elite output. The other gets you a partner who is personally invested in your growth.",
+  "items": [
+    {
+      "id": "basic",
+      "name": "Edit Engine",
+      "tag": "Basic Package",
+      "price": "$500–700",
+      "period": "/ month",
+      "featured": false,
+      "summary": "High-volume, high-craft short-form output for brands that already have footage and need it weaponized.",
+      "features": [
+        "12–15 cinematic reels per month",
+        "Hook & caption engineering on every cut",
+        "Script polish on your raw ideas",
+        "Retention-first editing & sound design",
+        "48-hour average turnaround",
+        "2 revision rounds per deliverable"
+      ],
+      "cta": "Claim a slot"
+    },
+    {
+      "id": "growth-operator",
+      "name": "Growth Operator",
+      "tag": "Flagship Partnership",
+      "price": "$1,200–1,800",
+      "period": "/ month",
+      "featured": true,
+      "badge": "Most leverage",
+      "summary": "Full-stack growth partnership. I run your content operation end-to-end and answer for the numbers, not just the edits.",
+      "features": [
+        "Everything in Edit Engine",
+        "Original scriptwriting & hooks",
+        "AI-assisted cinematic ad spots",
+        "Talking-head direction & shoot guidance",
+        "Monthly content strategy & publishing calendar",
+        "Distribution, funnel & booking optimization",
+        "Monthly performance readout — in plain numbers"
+      ],
+      "cta": "Apply for partnership"
+    },
+    {
+      "id": "sprint",
+      "name": "Campaign Sprint",
+      "tag": "One-off Launch",
+      "price": "From $900",
+      "period": "/ project",
+      "featured": false,
+      "summary": "A single campaign, end-to-end: strategy, script, production, edit, and launch. Built for openings, offers, and events.",
+      "features": [
+        "Campaign strategy & offer angle",
+        "Full scriptwriting",
+        "1 hero film + 4–6 cutdown reels",
+        "AI-assisted production where it wins",
+        "Launch-week publishing plan"
+      ],
+      "cta": "Book a sprint"
+    }
+  ],
+  "footnote": "Prices are ranges, not riddles — final quote depends on scope and turnaround. Retainers are month-to-month. If the work doesn't perform, you shouldn't keep paying for it."
+}

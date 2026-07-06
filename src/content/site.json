@@ -1,0 +1,41 @@
+{
+  "name": "Basanta Parajuli",
+  "brandMark": "BASANTA PARAJULI",
+  "role": "Creative Strategist & Growth Partner",
+  "location": "Working worldwide — fully remote",
+  "email": "basantaparajuli.6969@gmail.com",
+  "availability": "Accepting 2 new growth partners",
+  "nav": [
+    { "label": "Work", "href": "#work" },
+    { "label": "Services", "href": "#services" },
+    { "label": "Packages", "href": "#packages" },
+    { "label": "Contact", "href": "#contact" }
+  ],
+  "hero": {
+    "kicker": "Creative Strategist / Growth Partner",
+    "headline": ["Growth is not luck.", "It's produced."],
+    "accentWordIndex": 1,
+    "subline": "I partner with brands and founders to scale revenue through cinematic short-form, long-form, and ad creative — content engineered to convert, not to decorate.",
+    "primaryCta": { "label": "Start a project", "href": "#contact" },
+    "secondaryCta": { "label": "See the work", "href": "#work" },
+    "stats": [
+      { "value": "12–15", "label": "Reels shipped / month" },
+      { "value": "48H", "label": "Average turnaround" },
+      { "value": "E2E", "label": "Script → edit → ship" },
+      { "value": "100%", "label": "Remote, worldwide" }
+    ]
+  },
+  "contact": {
+    "headline": ["Make your competition", "nervous."],
+    "subline": "Tell me what you sell and where it needs to go. I reply within 24 hours with a straight answer — no discovery-call theatre.",
+    "budgetOptions": ["$500 – $700 / mo", "$700 – $1,500 / mo", "$1,500+ / mo", "One-off campaign"]
+  },
+  "footer": {
+    "note": "Built to convert. No templates were harmed.",
+    "socials": [
+      { "label": "Instagram", "href": "https://instagram.com/" },
+      { "label": "LinkedIn", "href": "https://linkedin.com/" },
+      { "label": "WhatsApp", "href": "https://wa.me/" }
+    ]
+  }
+}
