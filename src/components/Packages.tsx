@@ -5,6 +5,7 @@
  * Content comes from content/packages.json. The card with
  * `featured: true` gets the signal treatment automatically.
  */
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import packages from "@/content/packages.json";
 import SectionHeader from "@/components/SectionHeader";
 import { Reveal } from "@/components/motion/Reveal";
@@ -12,9 +13,30 @@ import { Reveal } from "@/components/motion/Reveal";
 type Pkg = (typeof packages.items)[number];
 
 function PackageCard({ pkg, index }: { pkg: Pkg; index: number }) {
+  /* Mouse-tracked 3D tilt — card angles toward the cursor, springs back on leave */
+  const mouseX = useMotionValue(0.5);
+  const mouseY = useMotionValue(0.5);
+  const springConfig = { stiffness: 150, damping: 20 };
+  const rotateX = useSpring(useTransform(mouseY, [0, 1], [7, -7]), springConfig);
+  const rotateY = useSpring(useTransform(mouseX, [0, 1], [-7, 7]), springConfig);
+
+  function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set((e.clientX - rect.left) / rect.width);
+    mouseY.set((e.clientY - rect.top) / rect.height);
+  }
+
+  function handleMouseLeave() {
+    mouseX.set(0.5);
+    mouseY.set(0.5);
+  }
+
   return (
-    <Reveal delay={index * 0.1} className="h-full">
-      <article
+    <Reveal delay={index * 0.1} className="h-full [perspective:1200px]">
+      <motion.article
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         className={`relative flex h-full flex-col p-6 md:p-8 ${
           pkg.featured ? "bg-panel" : "bg-ink"
         }`}
@@ -64,7 +86,7 @@ function PackageCard({ pkg, index }: { pkg: Pkg; index: number }) {
         >
           {pkg.cta} ↗
         </a>
-      </article>
+      </motion.article>
     </Reveal>
   );
 }

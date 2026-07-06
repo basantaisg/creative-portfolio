@@ -9,6 +9,7 @@
  *   - Self-hosted:    paste a direct .mp4/.webm url (poster optional)
  * Leave it "" and the slot renders a quiet placeholder frame.
  */
+import { motion } from "framer-motion";
 import work from "@/content/work.json";
 import SectionHeader from "@/components/SectionHeader";
 import { Reveal } from "@/components/motion/Reveal";
@@ -45,9 +46,14 @@ function VideoSlot({ item }: { item: WorkItem }) {
     );
   }
 
-  /* Quiet placeholder frame — just a play ring and a whisper of a label */
+  /* Quiet placeholder frame — a slow-pulsing dark gradient skeleton, play ring, and a whisper of a label */
   return (
     <div className="relative aspect-video w-full overflow-hidden border border-line-soft bg-well">
+      <motion.div
+        className="absolute inset-0 bg-[linear-gradient(135deg,#060606_0%,#161613_50%,#060606_100%)]"
+        animate={{ opacity: [0.5, 0.9, 0.5] }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+      />
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="flex h-14 w-14 items-center justify-center rounded-full border border-line transition-all duration-500 group-hover:scale-110 group-hover:border-signal">
           <span className="ml-0.5 text-[10px] text-dim transition-colors duration-500 group-hover:text-signal">

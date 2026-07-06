@@ -24,7 +24,7 @@ export default function Services() {
             <Reveal key={service.index} delay={i * 0.05}>
               <div className="group grid grid-cols-[3rem_1fr] items-baseline gap-4 border-b border-line py-8 transition-colors duration-300 hover:bg-panel md:grid-cols-[6rem_1fr_1.1fr] md:gap-8 md:px-4">
                 {/* Index */}
-                <span className="type-label text-signal">
+                <span className="type-label inline-block text-signal transition-transform duration-300 hover:scale-110 hover:drop-shadow-[0_0_10px_rgba(255,100,0,0.8)] group-hover:scale-110 group-hover:drop-shadow-[0_0_10px_rgba(255,100,0,0.8)]">
                   {service.index}
                 </span>
 

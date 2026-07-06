@@ -7,6 +7,7 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import site from "@/content/site.json";
+import SmoothScroll from "@/components/SmoothScroll";
 
 /* Display face — characterful variable grotesque for headlines */
 const bricolage = Bricolage_Grotesque({
@@ -48,7 +49,9 @@ export default function RootLayout({
       lang="en"
       className={`${bricolage.variable} ${figtree.variable} ${instrumentSerif.variable} ${plexMono.variable}`}
     >
-      <body className="noise">{children}</body>
+      <body className="noise">
+        <SmoothScroll>{children}</SmoothScroll>
+      </body>
     </html>
   );
 }
