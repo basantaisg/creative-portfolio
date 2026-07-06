@@ -20,7 +20,7 @@ export default function SectionHeader({
   note,
 }: SectionHeaderProps) {
   return (
-    <Reveal className="mb-14 md:mb-20">
+    <Reveal className="mb-10 md:mb-20">
       <div className="flex items-baseline justify-between border-b border-line pb-4">
         <p className="type-label text-signal">
           {"//"} {kicker}

@@ -15,7 +15,7 @@ function PackageCard({ pkg, index }: { pkg: Pkg; index: number }) {
   return (
     <Reveal delay={index * 0.1} className="h-full">
       <article
-        className={`relative flex h-full flex-col p-8 ${
+        className={`relative flex h-full flex-col p-6 md:p-8 ${
           pkg.featured ? "bg-panel" : "bg-ink"
         }`}
       >
@@ -34,7 +34,7 @@ function PackageCard({ pkg, index }: { pkg: Pkg; index: number }) {
 
         <p className="mt-8">
           <span
-            className={`type-display text-5xl ${
+            className={`type-display text-4xl md:text-5xl ${
               pkg.featured ? "text-signal" : "text-bone"
             }`}
           >
@@ -72,7 +72,7 @@ function PackageCard({ pkg, index }: { pkg: Pkg; index: number }) {
 export default function Packages() {
   return (
     <section id="packages" className="border-b border-line">
-      <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-32">
         <SectionHeader
           index="03"
           kicker={packages.sectionKicker}

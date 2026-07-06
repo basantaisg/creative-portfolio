@@ -11,7 +11,7 @@ import { Reveal } from "@/components/motion/Reveal";
 export default function Services() {
   return (
     <section id="services" className="border-b border-line">
-      <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-32">
         <SectionHeader
           index="02"
           kicker={services.sectionKicker}

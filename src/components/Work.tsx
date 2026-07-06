@@ -109,7 +109,7 @@ function WorkCard({ item, index }: { item: WorkItem; index: number }) {
 export default function Work() {
   return (
     <section id="work" className="border-b border-line">
-      <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-32">
         <SectionHeader
           index="01"
           kicker={work.sectionKicker}

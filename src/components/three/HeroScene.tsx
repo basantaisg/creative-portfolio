@@ -135,10 +135,15 @@ function Particles({ count = 450 }: { count?: number }) {
 
 /** Default export: the canvas itself. Loaded client-side only. */
 export default function HeroScene() {
+  // This component never renders on the server (ssr:false), so window
+  // is safe here. Phones get a lighter scene: fewer particles and a
+  // pulled-back camera so the rig fits a narrow viewport.
+  const isMobile = window.matchMedia("(max-width: 767px)").matches;
+
   return (
     <Canvas
       dpr={[1, 1.5]}
-      camera={{ position: [0, 0, 8], fov: 42 }}
+      camera={{ position: [0, 0, isMobile ? 10.5 : 8], fov: 42 }}
       gl={{
         antialias: true,
         alpha: true,
@@ -151,7 +156,7 @@ export default function HeroScene() {
       <pointLight position={[-6, -3, -2]} intensity={14} color={SIGNAL} />
       <Rig>
         <Core />
-        <Particles />
+        <Particles count={isMobile ? 220 : 450} />
       </Rig>
     </Canvas>
   );

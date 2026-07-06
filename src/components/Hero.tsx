@@ -22,7 +22,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-screen flex-col justify-end overflow-hidden border-b border-line"
+      className="relative flex min-h-svh flex-col justify-end overflow-hidden border-b border-line"
     >
       {/* 1 — 3D layer */}
       <HeroCanvas />
@@ -31,18 +31,19 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/10 to-ink" />
 
       {/* 3 — content */}
-      <div className="relative mx-auto w-full max-w-[1400px] px-5 pt-32 md:px-10">
+      <div className="relative mx-auto w-full max-w-[1400px] px-5 pb-6 pt-28 md:px-10 md:pb-8 md:pt-32">
         <motion.p
           className="type-label mb-8 text-signal"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
         >
-          {"//"} {hero.kicker} — {site.location}
+          {"//"} {hero.kicker}
+          <span className="hidden sm:inline"> — {site.location}</span>
         </motion.p>
 
         {/* Headline: one masked reveal per line, staggered */}
-        <h1 className="type-display text-[clamp(3rem,9vw,7.5rem)]">
+        <h1 className="type-display text-[clamp(2.25rem,10vw,7.5rem)]">
           {hero.headline.map((line, i) => (
             <MaskReveal key={line} delay={0.25 + i * 0.12}>
               {i === hero.accentWordIndex ? (
@@ -64,18 +65,18 @@ export default function Hero() {
           <p className="max-w-md text-base leading-relaxed text-dim">
             {hero.subline}
           </p>
-          <div className="flex shrink-0 gap-3">
+          <div className="flex w-full flex-col gap-3 sm:w-auto sm:shrink-0 sm:flex-row">
             <a
               href={hero.primaryCta.href}
               target={hero.primaryCta.external ? "_blank" : undefined}
               rel={hero.primaryCta.external ? "noopener noreferrer" : undefined}
-              className="type-label rounded-full bg-signal px-7 py-4 text-ink transition-colors duration-300 hover:bg-bone"
+              className="type-label rounded-full bg-signal px-7 py-4 text-center text-ink transition-colors duration-300 hover:bg-bone"
             >
               {hero.primaryCta.label} ↗
             </a>
             <a
               href={hero.secondaryCta.href}
-              className="type-label rounded-full border border-line px-7 py-4 text-bone transition-colors duration-300 hover:border-signal hover:text-signal"
+              className="type-label rounded-full border border-line px-7 py-4 text-center text-bone transition-colors duration-300 hover:border-signal hover:text-signal"
             >
               {hero.secondaryCta.label}
             </a>
@@ -92,11 +93,13 @@ export default function Hero() {
           {hero.stats.map((stat, i) => (
             <div
               key={stat.label}
-              className={`py-6 pr-6 ${i > 0 ? "border-l border-line pl-6" : ""} ${
+              className={`py-4 pr-4 md:py-6 md:pr-6 ${i > 0 ? "border-l border-line pl-4 md:pl-6" : ""} ${
                 i === 2 ? "max-md:border-l-0 max-md:pl-0 max-md:border-t max-md:border-line" : ""
               } ${i === 3 ? "max-md:border-t max-md:border-line" : ""}`}
             >
-              <dd className="type-display text-3xl text-bone">{stat.value}</dd>
+              <dd className="type-display text-2xl text-bone md:text-3xl">
+                {stat.value}
+              </dd>
               <dt className="type-label mt-2 block text-dim">{stat.label}</dt>
             </div>
           ))}

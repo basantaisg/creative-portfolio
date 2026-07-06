@@ -47,7 +47,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="border-b border-line">
-      <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-32">
         <SectionHeader
           index="04"
           kicker="Contact"
