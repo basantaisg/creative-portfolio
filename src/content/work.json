@@ -19,16 +19,16 @@
       "videoPoster": ""
     },
     {
-      "id": "tersatar-futsal",
-      "client": "Tersatar Futsal",
-      "objective": "Booking Conversions",
+      "id": "long-form-work",
+      "client": "Long-form Work",
+      "objective": "Depth & Retention",
       "year": "2026",
       "size": "large",
-      "description": "Direct-response reels engineered for one metric: booked court hours. Hook, proof, offer, book — no wasted frames.",
-      "deliverables": ["DR reels", "Offer scripting", "Booking funnel"],
+      "description": "Long-form edits built to hold attention past the ten-minute mark — story structure, pacing, and packaging that turn viewers into an audience.",
+      "deliverables": ["Long-form edit", "Story structure", "Packaging"],
       "metrics": [
-        { "value": "—", "label": "Booking lift" },
-        { "value": "—", "label": "Cost per booking" }
+        { "value": "—", "label": "Avg. watch time" },
+        { "value": "—", "label": "Audience retention" }
       ],
       "videoUrl": "",
       "videoPoster": ""
@@ -48,13 +48,13 @@
       "videoPoster": ""
     },
     {
-      "id": "ai-cinematic-spot",
-      "client": "AI Cinematic Spot",
+      "id": "mograph-ads-xyz",
+      "client": "Mograph Ads — XYZ Brand",
       "objective": "Product Launch",
       "year": "2026",
       "size": "small",
-      "description": "Fully AI-generated cinematic ad spot — impossible shots on a real-world budget, graded to sit next to broadcast work.",
-      "deliverables": ["AI generation", "Sound design", "Grade"],
+      "description": "Motion-graphics ad spots for XYZ brand — kinetic type, clean transitions, and product-first storytelling graded to sit next to broadcast work.",
+      "deliverables": ["Motion design", "Sound design", "Ad cutdowns"],
       "metrics": [
         { "value": "—", "label": "Production cost saved" }
       ],
