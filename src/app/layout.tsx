@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import {
   Bricolage_Grotesque,
   Figtree,
@@ -37,8 +37,36 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: `${site.name} — ${site.role}`,
   description: site.hero.subline,
+  keywords: [
+    "video editor",
+    "creative strategist",
+    "growth partner",
+    "short-form content",
+    "reels editor",
+    "content strategy",
+    site.name,
+  ],
+  openGraph: {
+    title: `${site.name} — ${site.role}`,
+    description: site.hero.subline,
+    url: "/",
+    siteName: site.name,
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.name} — ${site.role}`,
+    description: site.hero.subline,
+  },
+  robots: { index: true, follow: true },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0a0a09",
 };
 
 export default function RootLayout({

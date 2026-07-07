@@ -48,12 +48,12 @@
       "videoPoster": ""
     },
     {
-      "id": "mograph-ads-xyz",
-      "client": "Mograph Ads for XYZ Brand",
+      "id": "mograph-ad-spots",
+      "client": "Motion-Graphics Ad Spots",
       "objective": "Product Launch",
       "year": "2026",
       "size": "small",
-      "description": "Motion-graphics ad spots for XYZ brand, built with kinetic type, clean transitions, and product-first storytelling graded to sit next to broadcast work.",
+      "description": "Motion-graphics ad spots for product launches, built with kinetic type, clean transitions, and product-first storytelling graded to sit next to broadcast work.",
       "deliverables": ["Motion design", "Sound design", "Ad cutdowns"],
       "metrics": [
         { "value": "TBD", "label": "Production cost saved" }

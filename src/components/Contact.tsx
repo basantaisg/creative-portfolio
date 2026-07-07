@@ -20,7 +20,13 @@ const fieldClass =
 
 export default function Contact() {
   const { contact } = site;
-  const [sent, setSent] = useState(false);
+  /* After submit we keep the composed message around so visitors whose
+     machines have no mail client configured can still copy it out —
+     the mailto: jump silently does nothing for them otherwise. */
+  const [sent, setSent] = useState<{ subject: string; body: string } | null>(
+    null
+  );
+  const [copied, setCopied] = useState(false);
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -42,7 +48,20 @@ export default function Contact() {
     window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
-    setSent(true);
+    setSent({ subject, body });
+  }
+
+  async function handleCopy() {
+    if (!sent) return;
+    try {
+      await navigator.clipboard.writeText(
+        `To: ${site.email}\nSubject: ${sent.subject}\n\n${sent.body}`
+      );
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      /* Clipboard blocked — the email address is printed right there */
+    }
   }
 
   return (
@@ -124,10 +143,26 @@ export default function Contact() {
                   Message armed.
                 </p>
                 <p className="mt-4 max-w-sm text-sm leading-relaxed text-dim">
-                  Your email client just opened with everything pre-filled.
-                  Hit send and I&apos;ll reply within 24 hours. Didn&apos;t
-                  open? Email me directly at {site.email}.
+                  Your email client should have opened with everything
+                  pre-filled — hit send and I&apos;ll reply within 24 hours.
+                  Nothing opened? Copy your message below and send it to{" "}
+                  <span className="text-bone">{site.email}</span>.
                 </p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <button
+                    type="button"
+                    onClick={handleCopy}
+                    className="type-label rounded-full bg-signal px-6 py-3 text-ink transition-colors duration-300 hover:bg-bone"
+                  >
+                    {copied ? "Copied ✓" : "Copy message"}
+                  </button>
+                  <a
+                    href={`mailto:${site.email}`}
+                    className="type-label rounded-full border border-line px-6 py-3 text-bone transition-colors duration-300 hover:border-signal hover:text-signal"
+                  >
+                    Open email app ↗
+                  </a>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-2">
@@ -155,16 +190,26 @@ export default function Contact() {
                 <label className="type-label mt-8 text-dim" htmlFor="budget">
                   03 / Monthly budget
                 </label>
-                <select
-                  id="budget"
-                  name="budget"
-                  className={`${fieldClass} appearance-none [&>option]:bg-ink`}
-                  defaultValue={contact.budgetOptions[0]}
-                >
-                  {contact.budgetOptions.map((option) => (
-                    <option key={option}>{option}</option>
-                  ))}
-                </select>
+                {/* appearance-none strips the native arrow, so we draw our
+                    own chevron — without it this doesn't read as a dropdown */}
+                <div className="relative">
+                  <select
+                    id="budget"
+                    name="budget"
+                    className={`${fieldClass} appearance-none pr-8 [&>option]:bg-ink`}
+                    defaultValue={contact.budgetOptions[0]}
+                  >
+                    {contact.budgetOptions.map((option) => (
+                      <option key={option}>{option}</option>
+                    ))}
+                  </select>
+                  <span
+                    aria-hidden="true"
+                    className="type-label pointer-events-none absolute right-1 top-1/2 -translate-y-1/2 text-signal"
+                  >
+                    ▾
+                  </span>
+                </div>
 
                 <label className="type-label mt-8 text-dim" htmlFor="message">
                   04 / The mission

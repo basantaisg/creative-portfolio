@@ -70,40 +70,65 @@ function VideoSlot({ item }: { item: WorkItem }) {
 
 /* ------------------------------------------------------------------ */
 /*  Case-study card                                                    */
+/*  `size: "large"` items span the full row and lay out video-beside-  */
+/*  text on desktop; `"small"` items stack in half-width columns —     */
+/*  the scale shift is what keeps the grid editorial, not templated.   */
+/*  Metrics still marked "TBD" in work.json stay hidden until real     */
+/*  numbers replace them.                                              */
 /* ------------------------------------------------------------------ */
 function WorkCard({ item, index }: { item: WorkItem; index: number }) {
-  return (
-    <Reveal delay={(index % 2) * 0.1} className="h-full">
-      <article className="group flex h-full flex-col gap-6 bg-ink p-6 transition-colors duration-500 hover:bg-panel md:p-8">
-        <VideoSlot item={item} />
+  const isLarge = item.size === "large";
+  const metrics = item.metrics.filter((m) => m.value !== "TBD");
 
-        {/* Client + objective */}
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <h3 className="type-display text-2xl text-bone md:text-3xl">
-            {item.client}
-          </h3>
-          <span className="type-label flex items-center gap-2 text-dim">
-            <span className="h-1 w-1 rounded-full bg-signal" />
-            {item.objective}
-          </span>
-        </div>
+  const meta = (
+    <>
+      {/* Client + objective + year */}
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h3 className="type-display text-2xl text-bone md:text-3xl">
+          {item.client}
+        </h3>
+        <span className="type-label flex items-center gap-2 text-dim">
+          <span className="h-1 w-1 rounded-full bg-signal" />
+          {item.objective}
+          <span className="text-dim/50">/ {item.year}</span>
+        </span>
+      </div>
 
-        <p className="text-sm leading-relaxed text-dim">{item.description}</p>
+      <p className="text-sm leading-relaxed text-dim">{item.description}</p>
 
-        {/* Deliverables + metrics on the baseline */}
-        <div className="mt-auto flex flex-wrap items-end justify-between gap-4 border-t border-line-soft pt-4">
-          <p className="type-label text-dim">
-            {item.deliverables.join(" · ")}
-          </p>
+      {/* Deliverables + metrics on the baseline */}
+      <div className="mt-auto flex flex-wrap items-end justify-between gap-4 border-t border-line-soft pt-4">
+        <p className="type-label text-dim">{item.deliverables.join(" · ")}</p>
+        {metrics.length > 0 && (
           <div className="flex gap-8">
-            {item.metrics.map((m) => (
+            {metrics.map((m) => (
               <div key={m.label} className="text-right">
                 <p className="type-display text-xl text-bone">{m.value}</p>
                 <p className="type-label mt-1 text-dim">{m.label}</p>
               </div>
             ))}
           </div>
-        </div>
+        )}
+      </div>
+    </>
+  );
+
+  if (isLarge) {
+    return (
+      <Reveal className="h-full md:col-span-2">
+        <article className="group grid h-full gap-6 bg-ink p-6 transition-colors duration-500 hover:bg-panel md:grid-cols-[3fr_2fr] md:gap-10 md:p-8">
+          <VideoSlot item={item} />
+          <div className="flex flex-col gap-6">{meta}</div>
+        </article>
+      </Reveal>
+    );
+  }
+
+  return (
+    <Reveal delay={(index % 2) * 0.1} className="h-full">
+      <article className="group flex h-full flex-col gap-6 bg-ink p-6 transition-colors duration-500 hover:bg-panel md:p-8">
+        <VideoSlot item={item} />
+        {meta}
       </article>
     </Reveal>
   );

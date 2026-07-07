@@ -52,6 +52,13 @@ body {
   }
 }
 
+/* Anchored sections land just below the fixed 56px nav.
+   (Lenis mirrors this via its anchors offset; this covers the
+   no-JS / reduced-motion native-scroll path.) */
+section[id] {
+  scroll-margin-top: 3.5rem;
+}
+
 ::selection {
   background: var(--color-signal);
   color: var(--color-ink);
@@ -78,6 +85,7 @@ body {
   font-weight: 600;
   line-height: 1.02;
   letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 
 /* Serif italic accent — emphasis words inside display headlines */
@@ -119,4 +127,26 @@ body {
 }
 .animate-signal {
   animation: signal-pulse 1.6s ease-in-out infinite;
+}
+
+/* Footer name marquee — track holds two copies, shifts by one */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+/* Reduced motion: freeze decorative loops; Lenis and Framer Motion
+   handle themselves via matchMedia / MotionConfig in JS. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-signal,
+  .animate-marquee {
+    animation: none;
+  }
 }

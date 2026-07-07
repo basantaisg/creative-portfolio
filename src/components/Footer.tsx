@@ -5,14 +5,34 @@
 import site from "@/content/site.json";
 
 export default function Footer() {
-  return (
-    <footer className="overflow-hidden">
-      {/* Giant name strip */}
-      <div className="border-b border-line px-5 py-16 md:px-10">
-        <p className="type-display text-center text-[clamp(2.5rem,8.5vw,8rem)] leading-none text-bone/90">
+  /* The track holds two identical halves; the marquee keyframe shifts
+     it by exactly -50%, so the loop point is invisible. Freezes under
+     prefers-reduced-motion (globals.css). */
+  const nameRun = (
+    <span aria-hidden="true" className="flex shrink-0 items-baseline">
+      {[0, 1].map((i) => (
+        <span key={i} className="flex shrink-0 items-baseline">
           {site.name}
           <span className="type-serif text-signal">.</span>
-        </p>
+          <span className="mx-[0.5em] text-signal">·</span>
+        </span>
+      ))}
+    </span>
+  );
+
+  return (
+    <footer className="overflow-hidden">
+      {/* Giant name marquee */}
+      <div className="border-b border-line py-16">
+        <p className="sr-only">{site.name}</p>
+        <div className="flex overflow-hidden whitespace-nowrap">
+          <div className="animate-marquee flex shrink-0 items-baseline">
+            <span className="type-display flex shrink-0 items-baseline text-[clamp(2.5rem,8.5vw,8rem)] leading-none text-bone/90">
+              {nameRun}
+              {nameRun}
+            </span>
+          </div>
+        </div>
       </div>
 
       {/* Colophon */}

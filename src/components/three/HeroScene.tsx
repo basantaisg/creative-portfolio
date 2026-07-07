@@ -25,15 +25,17 @@ const BONE = "#e9e6df";
 const CYCLE_SPEED = 0.06;
 
 /**
- * Curated 4-stop palette the ring gradient and rim light both cycle through,
- * starting from the brand signal orange. Kept in JS (for the light) and
- * mirrored as floats in the ring shader below — GLSL can't import this array.
+ * Curated 4-stop palette the ring gradient and rim light both cycle through.
+ * Warm-only — orange heat through amber into a hot bone-white glint —
+ * so the hero never drifts off the site's single-accent system.
+ * Kept in JS (for the light) and mirrored as floats in the ring shader
+ * below — GLSL can't import this array.
  */
 const PALETTE = [
   new THREE.Color("#ff4d00"), // signal orange
   new THREE.Color("#ffb020"), // amber
-  new THREE.Color("#ff2ea6"), // magenta
-  new THREE.Color("#2e6bff"), // electric blue
+  new THREE.Color("#e9e6df"), // bone — hot white glint
+  new THREE.Color("#ff6a3d"), // ember — back toward signal
 ];
 
 function paletteColor(t: number, target: THREE.Color) {
@@ -60,8 +62,8 @@ const RING_FRAGMENT_SHADER = /* glsl */ `
   vec3 palette(float t) {
     vec3 c0 = vec3(1.000, 0.302, 0.000); // signal orange
     vec3 c1 = vec3(1.000, 0.690, 0.125); // amber
-    vec3 c2 = vec3(1.000, 0.180, 0.651); // magenta
-    vec3 c3 = vec3(0.180, 0.420, 1.000); // electric blue
+    vec3 c2 = vec3(0.914, 0.902, 0.875); // bone — hot white glint
+    vec3 c3 = vec3(1.000, 0.416, 0.239); // ember — back toward signal
 
     float scaled = fract(t) * 4.0;
     float i = floor(scaled);
@@ -218,15 +220,21 @@ function Particles({ count = 450 }: { count?: number }) {
 }
 
 /** Default export: the canvas itself. Loaded client-side only. */
-export default function HeroScene() {
+export default function HeroScene({ active = true }: { active?: boolean }) {
   // This component never renders on the server (ssr:false), so window
   // is safe here. Phones get a lighter scene: fewer particles and a
   // pulled-back camera so the rig fits a narrow viewport.
   const isMobile = window.matchMedia("(max-width: 767px)").matches;
+  // Reduced-motion users get a single static frame — the composition
+  // stays, the perpetual spin goes.
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
   return (
     <Canvas
       dpr={[1, 1.5]}
+      frameloop={active && !reducedMotion ? "always" : "never"}
       camera={{ position: [0, 0, isMobile ? 10.5 : 8], fov: 42 }}
       gl={{
         antialias: true,

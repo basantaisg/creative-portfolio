@@ -17,8 +17,8 @@ function PackageCard({ pkg, index }: { pkg: Pkg; index: number }) {
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
   const springConfig = { stiffness: 150, damping: 20 };
-  const rotateX = useSpring(useTransform(mouseY, [0, 1], [7, -7]), springConfig);
-  const rotateY = useSpring(useTransform(mouseX, [0, 1], [-7, 7]), springConfig);
+  const rotateX = useSpring(useTransform(mouseY, [0, 1], [4, -4]), springConfig);
+  const rotateY = useSpring(useTransform(mouseX, [0, 1], [-4, 4]), springConfig);
 
   function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -32,7 +32,12 @@ function PackageCard({ pkg, index }: { pkg: Pkg; index: number }) {
   }
 
   return (
-    <Reveal delay={index * 0.1} className="h-full [perspective:1200px]">
+    /* hover:z-10 lifts the tilting card above its grid siblings so the
+       rotated edges never slide underneath the neighboring cells */
+    <Reveal
+      delay={index * 0.1}
+      className="relative h-full [perspective:1200px] hover:z-10"
+    >
       <motion.article
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
