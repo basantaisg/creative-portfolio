@@ -36,22 +36,34 @@ const plexMono = IBM_Plex_Mono({
   variable: "--font-plex-mono",
 });
 
+/* seoTitle/seoDescription (site.json) are written for what prospects
+   actually type into Google ("video editor"), independent of the
+   on-page brand language ("Creative Strategist & Growth Partner"). */
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: `${site.name} — ${site.role}`,
-  description: site.hero.subline,
+  title: site.seoTitle,
+  description: site.seoDescription,
+  alternates: { canonical: "/" },
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  category: "Video Production",
   keywords: [
     "video editor",
+    "freelance video editor",
+    "hire video editor",
+    "short-form video editor",
+    "reels editor",
+    "YouTube video editor",
+    "long-form video editing",
+    "video ad creative",
+    "content strategist",
     "creative strategist",
     "growth partner",
-    "short-form content",
-    "reels editor",
-    "content strategy",
     site.name,
   ],
   openGraph: {
-    title: `${site.name} — ${site.role}`,
-    description: site.hero.subline,
+    title: site.seoTitle,
+    description: site.seoDescription,
     url: "/",
     siteName: site.name,
     type: "website",
@@ -59,10 +71,19 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — ${site.role}`,
-    description: site.hero.subline,
+    title: site.seoTitle,
+    description: site.seoDescription,
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export const viewport: Viewport = {
