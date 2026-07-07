@@ -18,7 +18,7 @@ export default function Footer() {
       {/* Colophon */}
       <div className="mx-auto flex max-w-[1400px] flex-col items-start justify-between gap-6 px-5 py-8 md:flex-row md:items-center md:px-10">
         <p className="type-label text-dim">
-          © {new Date().getFullYear()} {site.name} — {site.footer.note}
+          © {new Date().getFullYear()} {site.name}. {site.footer.note}
         </p>
 
         <nav className="flex gap-6">

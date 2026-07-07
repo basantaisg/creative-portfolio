@@ -39,7 +39,7 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
         >
           {"//"} {hero.kicker}
-          <span className="hidden sm:inline"> — {site.location}</span>
+          <span className="hidden sm:inline"> · {site.location}</span>
         </motion.p>
 
         {/* Headline: one masked reveal per line, staggered */}

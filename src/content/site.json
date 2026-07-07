@@ -2,7 +2,7 @@
   "name": "Basanta Parajuli",
   "brandMark": "BASANTA PARAJULI",
   "role": "Creative Strategist & Growth Partner",
-  "location": "Working worldwide — fully remote",
+  "location": "Working worldwide, fully remote",
   "email": "basantaparajuli.11@gmail.com",
   "calendly": "https://calendly.com/basantaparajuli-11/30min",
   "availability": "Accepting 2 new growth partners",
@@ -21,7 +21,7 @@
     "kicker": "Creative Strategist / Growth Partner",
     "headline": ["Growth is not luck.", "It's produced."],
     "accentWordIndex": 1,
-    "subline": "I partner with brands and founders to scale revenue through cinematic short-form, long-form, and ad creative — content engineered to convert, not to decorate.",
+    "subline": "I partner with brands and founders to scale revenue through cinematic short-form, long-form, and ad creative. Content engineered to convert, not to decorate.",
     "primaryCta": {
       "label": "Book a call",
       "href": "https://calendly.com/basantaparajuli-11/30min",
@@ -37,17 +37,17 @@
   },
   "contact": {
     "headline": ["Make your competition", "nervous."],
-    "subline": "Skip the form if you want — book a call or DM me directly. Either way, you get a straight answer within 24 hours. No discovery-call theatre.",
+    "subline": "Skip the form if you want: book a call or DM me directly. Either way, you get a straight answer within 24 hours. No discovery-call theatre.",
     "channels": [
       {
         "label": "Book a 30-min call",
-        "note": "Fastest route — pick a slot, we talk strategy",
+        "note": "Fastest route, pick a slot and we talk strategy",
         "href": "https://calendly.com/basantaparajuli-11/30min",
         "primary": true
       },
       {
         "label": "DM on Instagram",
-        "note": "@fusion.basanta — replies daily",
+        "note": "@fusion.basanta, usually replies same day",
         "href": "https://www.instagram.com/fusion.basanta/",
         "primary": false
       },

@@ -1,7 +1,7 @@
 {
   "sectionKicker": "Selected Work",
   "sectionTitle": "Case studies.",
-  "sectionNote": "Cinematic media with a job to do. Every piece below was built against a business objective — awareness, bookings, or authority.",
+  "sectionNote": "Cinematic media with a job to do. Every piece below was built against a business objective, whether that's awareness, bookings, or authority.",
   "items": [
     {
       "id": "bardali-cafe",
@@ -12,8 +12,8 @@
       "description": "A cinematic brand-film and reel system that turned a neighborhood cafe into the place everyone had already seen online before they ever walked in.",
       "deliverables": ["Brand film", "Reel system", "Scripting"],
       "metrics": [
-        { "value": "—", "label": "Organic reach" },
-        { "value": "—", "label": "Follower growth" }
+        { "value": "TBD", "label": "Organic reach" },
+        { "value": "TBD", "label": "Follower growth" }
       ],
       "videoUrl": "",
       "videoPoster": ""
@@ -24,11 +24,11 @@
       "objective": "Depth & Retention",
       "year": "2026",
       "size": "large",
-      "description": "Long-form edits built to hold attention past the ten-minute mark — story structure, pacing, and packaging that turn viewers into an audience.",
+      "description": "Long-form edits built to hold attention past the ten-minute mark. Story structure, pacing, and packaging that turn viewers into an audience.",
       "deliverables": ["Long-form edit", "Story structure", "Packaging"],
       "metrics": [
-        { "value": "—", "label": "Avg. watch time" },
-        { "value": "—", "label": "Audience retention" }
+        { "value": "TBD", "label": "Avg. watch time" },
+        { "value": "TBD", "label": "Audience retention" }
       ],
       "videoUrl": "",
       "videoPoster": ""
@@ -39,24 +39,24 @@
       "objective": "Authority Building",
       "year": "2026",
       "size": "small",
-      "description": "Founder-led talking-head episodes cut for retention — pattern interrupts, captions, and pacing that keep watch time up.",
+      "description": "Founder-led talking-head episodes cut for retention: pattern interrupts, captions, and pacing that keep watch time up.",
       "deliverables": ["Direction", "Edit system", "Captions"],
       "metrics": [
-        { "value": "—", "label": "Avg. watch time" }
+        { "value": "TBD", "label": "Avg. watch time" }
       ],
       "videoUrl": "",
       "videoPoster": ""
     },
     {
       "id": "mograph-ads-xyz",
-      "client": "Mograph Ads — XYZ Brand",
+      "client": "Mograph Ads for XYZ Brand",
       "objective": "Product Launch",
       "year": "2026",
       "size": "small",
-      "description": "Motion-graphics ad spots for XYZ brand — kinetic type, clean transitions, and product-first storytelling graded to sit next to broadcast work.",
+      "description": "Motion-graphics ad spots for XYZ brand, built with kinetic type, clean transitions, and product-first storytelling graded to sit next to broadcast work.",
       "deliverables": ["Motion design", "Sound design", "Ad cutdowns"],
       "metrics": [
-        { "value": "—", "label": "Production cost saved" }
+        { "value": "TBD", "label": "Production cost saved" }
       ],
       "videoUrl": "",
       "videoPoster": ""

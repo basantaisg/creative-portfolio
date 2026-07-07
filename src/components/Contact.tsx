@@ -30,7 +30,7 @@ export default function Contact() {
     const budget = String(data.get("budget") || "");
     const message = String(data.get("message") || "");
 
-    const subject = `Project inquiry — ${name}${business ? ` (${business})` : ""}`;
+    const subject = `Project inquiry: ${name}${business ? ` (${business})` : ""}`;
     const body = [
       `Name: ${name}`,
       `Business: ${business}`,
@@ -124,8 +124,8 @@ export default function Contact() {
                   Message armed.
                 </p>
                 <p className="mt-4 max-w-sm text-sm leading-relaxed text-dim">
-                  Your email client just opened with everything pre-filled —
-                  hit send and I&apos;ll reply within 24 hours. Didn&apos;t
+                  Your email client just opened with everything pre-filled.
+                  Hit send and I&apos;ll reply within 24 hours. Didn&apos;t
                   open? Email me directly at {site.email}.
                 </p>
               </div>
