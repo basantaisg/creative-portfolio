@@ -8,6 +8,7 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import packages from "@/content/packages.json";
 import SectionHeader from "@/components/SectionHeader";
+import Magnetic from "@/components/motion/Magnetic";
 import { Reveal } from "@/components/motion/Reveal";
 
 type Pkg = (typeof packages.items)[number];
@@ -81,16 +82,18 @@ function PackageCard({ pkg, index }: { pkg: Pkg; index: number }) {
           ))}
         </ul>
 
-        <a
-          href="#contact"
-          className={`type-label mt-10 block rounded-full px-6 py-4 text-center transition-colors duration-300 ${
-            pkg.featured
-              ? "bg-signal text-ink hover:bg-bone"
-              : "border border-line text-bone hover:border-signal hover:text-signal"
-          }`}
-        >
-          {pkg.cta} ↗
-        </a>
+        <Magnetic className="mt-10">
+          <a
+            href="#contact"
+            className={`type-label block rounded-full px-6 py-4 text-center transition-colors duration-300 ${
+              pkg.featured
+                ? "bg-signal text-ink hover:bg-bone"
+                : "border border-line text-bone hover:border-signal hover:text-signal"
+            }`}
+          >
+            {pkg.cta} ↗
+          </a>
+        </Magnetic>
       </motion.article>
     </Reveal>
   );

@@ -10,9 +10,11 @@
  */
 import { useState } from "react";
 import type { FormEvent } from "react";
+import { motion } from "framer-motion";
 import site from "@/content/site.json";
 import SectionHeader from "@/components/SectionHeader";
-import { Reveal } from "@/components/motion/Reveal";
+import Magnetic from "@/components/motion/Magnetic";
+import { EASE, Reveal } from "@/components/motion/Reveal";
 
 /* Shared brutalist input style: underline only, signal focus */
 const fieldClass =
@@ -96,7 +98,7 @@ export default function Contact() {
                 Rows come from content/site.json → contact.channels */}
             <div className="mt-12 border-t border-line">
               {contact.channels.map((channel, i) => (
-                <a
+                <motion.a
                   key={channel.label}
                   href={channel.href}
                   target={channel.href.startsWith("http") ? "_blank" : undefined}
@@ -105,6 +107,10 @@ export default function Contact() {
                       ? "noopener noreferrer"
                       : undefined
                   }
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.7, ease: EASE, delay: 0.15 + i * 0.08 }}
                   className="group flex items-center justify-between gap-4 border-b border-line py-5 transition-colors duration-300 hover:bg-panel md:px-3"
                 >
                   <div className="flex items-baseline gap-4">
@@ -125,7 +131,7 @@ export default function Contact() {
                   <span className="text-dim transition-all duration-300 group-hover:translate-x-1 group-hover:text-signal">
                     ↗
                   </span>
-                </a>
+                </motion.a>
               ))}
 
               <p className="mt-6 flex items-center gap-2">
@@ -223,12 +229,14 @@ export default function Contact() {
                   className={`${fieldClass} resize-none`}
                 />
 
-                <button
-                  type="submit"
-                  className="type-label mt-10 w-full rounded-full bg-signal px-8 py-5 text-ink transition-colors duration-300 hover:bg-bone"
-                >
-                  Send it ↗
-                </button>
+                <Magnetic className="mt-10">
+                  <button
+                    type="submit"
+                    className="type-label w-full rounded-full bg-signal px-8 py-5 text-ink transition-colors duration-300 hover:bg-bone"
+                  >
+                    Send it ↗
+                  </button>
+                </Magnetic>
               </form>
             )}
           </Reveal>

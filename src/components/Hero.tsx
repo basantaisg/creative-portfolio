@@ -11,14 +11,37 @@
  * All copy lives in content/site.json → hero. The line whose index
  * matches `accentWordIndex` renders in the italic serif accent face.
  */
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import site from "@/content/site.json";
 import HeroCanvas from "@/components/three/HeroCanvas";
 import { MaskReveal, EASE } from "@/components/motion/Reveal";
+import Magnetic from "@/components/motion/Magnetic";
 import { publishedWork } from "@/components/Work";
 
 export default function Hero() {
   const { hero } = site;
+
+  /* Scroll exit: as the hero leaves, content drifts up and fades while
+     the 3D rig recedes (scale + dim on the canvas wrapper — a single
+     composited transform, the scene itself never re-renders for this).
+     Scroll-linked styles bypass MotionConfig, so reduced motion is
+     honored explicitly here. */
+  const sectionRef = useRef<HTMLElement>(null);
+  const reducedMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
+  const canvasScale = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
+  const canvasOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.25]);
 
   /* While the Work section is hidden (no published videos yet, see
      Work.tsx) "#work" is a dead anchor — send "See the work" to
@@ -32,16 +55,33 @@ export default function Hero() {
   return (
     <section
       id="top"
+      ref={sectionRef}
       className="relative flex min-h-svh flex-col justify-end overflow-hidden border-b border-line"
     >
-      {/* 1 — 3D layer */}
-      <HeroCanvas />
+      {/* 1 — 3D layer (recedes on scroll exit) */}
+      <motion.div
+        className="absolute inset-0"
+        style={
+          reducedMotion
+            ? undefined
+            : { scale: canvasScale, opacity: canvasOpacity }
+        }
+      >
+        <HeroCanvas />
+      </motion.div>
 
       {/* 2 — legibility scrim */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/10 to-ink" />
 
-      {/* 3 — content */}
-      <div className="relative mx-auto w-full max-w-[1400px] px-5 pb-6 pt-28 md:px-10 md:pb-8 md:pt-32">
+      {/* 3 — content (drifts up + fades on scroll exit) */}
+      <motion.div
+        className="relative mx-auto w-full max-w-[1400px] px-5 pb-6 pt-28 md:px-10 md:pb-8 md:pt-32"
+        style={
+          reducedMotion
+            ? undefined
+            : { y: contentY, opacity: contentOpacity }
+        }
+      >
         <motion.p
           className="type-label mb-8 text-signal"
           initial={{ opacity: 0 }}
@@ -76,22 +116,26 @@ export default function Hero() {
             {hero.subline}
           </p>
           <div className="flex w-full flex-col gap-3 sm:w-auto sm:shrink-0 sm:flex-row">
-            <a
-              href={hero.primaryCta.href}
-              target={hero.primaryCta.external ? "_blank" : undefined}
-              rel={hero.primaryCta.external ? "noopener noreferrer" : undefined}
-              className="type-label rounded-full bg-signal px-7 py-4 text-center text-ink transition-colors duration-300 hover:bg-bone"
-            >
-              {hero.primaryCta.label} ↗
-            </a>
-            <a
-              href={secondaryCta.href}
-              target={secondaryCta.external ? "_blank" : undefined}
-              rel={secondaryCta.external ? "noopener noreferrer" : undefined}
-              className="type-label rounded-full border border-line px-7 py-4 text-center text-bone transition-colors duration-300 hover:border-signal hover:text-signal"
-            >
-              {secondaryCta.label}
-            </a>
+            <Magnetic>
+              <a
+                href={hero.primaryCta.href}
+                target={hero.primaryCta.external ? "_blank" : undefined}
+                rel={hero.primaryCta.external ? "noopener noreferrer" : undefined}
+                className="type-label block rounded-full bg-signal px-7 py-4 text-center text-ink transition-colors duration-300 hover:bg-bone"
+              >
+                {hero.primaryCta.label} ↗
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <a
+                href={secondaryCta.href}
+                target={secondaryCta.external ? "_blank" : undefined}
+                rel={secondaryCta.external ? "noopener noreferrer" : undefined}
+                className="type-label block rounded-full border border-line px-7 py-4 text-center text-bone transition-colors duration-300 hover:border-signal hover:text-signal"
+              >
+                {secondaryCta.label}
+              </a>
+            </Magnetic>
           </div>
         </motion.div>
 
@@ -116,7 +160,7 @@ export default function Hero() {
             </div>
           ))}
         </motion.dl>
-      </div>
+      </motion.div>
     </section>
   );
 }

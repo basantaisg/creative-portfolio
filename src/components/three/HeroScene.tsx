@@ -18,7 +18,6 @@ import { useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-const SIGNAL = "#ff4d00";
 const BONE = "#e9e6df";
 
 /** How fast the gradient sweeps around the ring / cycles through the light (cycles per second). */
@@ -184,19 +183,27 @@ function SignalLight() {
   return <pointLight ref={light} position={[-6, -3, -2]} intensity={14} />;
 }
 
-/** Sparse particle shell (radius 4.5–7.5) for parallax depth. */
+/** Sparse particle shell (radius 4.5–7.5) for parallax depth.
+    Seeded PRNG (mulberry32) keeps the shell deterministic — pure
+    under re-render, and the star field never reshuffles. */
+function mulberry32(seed: number) {
+  return () => {
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
 function Particles({ count = 450 }: { count?: number }) {
   const positions = useMemo(() => {
+    const rand = mulberry32(20260711);
     const arr = new Float32Array(count * 3);
     const v = new THREE.Vector3();
     for (let i = 0; i < count; i++) {
-      v.set(
-        Math.random() * 2 - 1,
-        Math.random() * 2 - 1,
-        Math.random() * 2 - 1
-      )
+      v.set(rand() * 2 - 1, rand() * 2 - 1, rand() * 2 - 1)
         .normalize()
-        .multiplyScalar(4.5 + Math.random() * 3);
+        .multiplyScalar(4.5 + rand() * 3);
       arr.set([v.x, v.y, v.z], i * 3);
     }
     return arr;

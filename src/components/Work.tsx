@@ -15,24 +15,25 @@
  */
 import work from "@/content/work.json";
 import SectionHeader from "@/components/SectionHeader";
-import { Reveal } from "@/components/motion/Reveal";
+import VideoFacade from "@/components/VideoFacade";
+import { FrameSettle, Reveal } from "@/components/motion/Reveal";
 
 type WorkItem = (typeof work.items)[number];
 
 /* ------------------------------------------------------------------ */
-/*  Video slot — placeholder / embed / file, decided by videoUrl       */
+/*  Video slot — embed (behind a poster facade) or file, decided by    */
+/*  videoUrl. The facade keeps YouTube/Vimeo player JS off the page    */
+/*  until someone actually presses play.                               */
 /* ------------------------------------------------------------------ */
 function VideoSlot({ item }: { item: WorkItem }) {
   const isEmbed = /youtube\.com|youtu\.be|vimeo\.com/.test(item.videoUrl);
 
   if (item.videoUrl && isEmbed) {
     return (
-      <iframe
+      <VideoFacade
         src={item.videoUrl}
         title={item.client}
-        className="aspect-video w-full border border-line-soft bg-well"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
+        poster={item.videoPoster || undefined}
       />
     );
   }
@@ -43,6 +44,7 @@ function VideoSlot({ item }: { item: WorkItem }) {
       poster={item.videoPoster || undefined}
       controls
       playsInline
+      preload="metadata"
       className="aspect-video w-full border border-line-soft bg-well object-cover"
     />
   );
@@ -99,7 +101,9 @@ function WorkCard({ item, index }: { item: WorkItem; index: number }) {
     return (
       <Reveal className="h-full md:col-span-2">
         <article className="group grid h-full gap-6 bg-ink p-6 transition-colors duration-500 hover:bg-panel md:grid-cols-[3fr_2fr] md:gap-10 md:p-8">
-          <VideoSlot item={item} />
+          <FrameSettle className="self-start">
+            <VideoSlot item={item} />
+          </FrameSettle>
           <div className="flex flex-col gap-6">{meta}</div>
         </article>
       </Reveal>
@@ -109,7 +113,9 @@ function WorkCard({ item, index }: { item: WorkItem; index: number }) {
   return (
     <Reveal delay={(index % 2) * 0.1} className="h-full">
       <article className="group flex h-full flex-col gap-6 bg-ink p-6 transition-colors duration-500 hover:bg-panel md:p-8">
-        <VideoSlot item={item} />
+        <FrameSettle delay={0.1}>
+          <VideoSlot item={item} />
+        </FrameSettle>
         {meta}
       </article>
     </Reveal>
