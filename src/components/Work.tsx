@@ -1,15 +1,18 @@
 "use client";
 
 /**
- * Work — the case-study / video portfolio grid.
+ * Work — the spec / concept video portfolio grid.
  *
  * All content comes from content/work.json. To publish a video, set
  * `videoUrl` on an item:
  *   - YouTube/Vimeo:  paste the EMBED url (youtube.com/embed/<id>)
  *   - Self-hosted:    paste a direct .mp4/.webm url (poster optional)
- * Leave it "" and the slot renders a quiet placeholder frame.
+ *
+ * Only items with a videoUrl render — no empty "footage slot" frames
+ * dressed up as finished work. With zero published videos the entire
+ * section (and its nav link, see Nav.tsx) stays hidden; drop a URL
+ * into work.json and the card, section, and nav link all come back.
  */
-import { motion } from "framer-motion";
 import work from "@/content/work.json";
 import SectionHeader from "@/components/SectionHeader";
 import { Reveal } from "@/components/motion/Reveal";
@@ -34,51 +37,30 @@ function VideoSlot({ item }: { item: WorkItem }) {
     );
   }
 
-  if (item.videoUrl) {
-    return (
-      <video
-        src={item.videoUrl}
-        poster={item.videoPoster || undefined}
-        controls
-        playsInline
-        className="aspect-video w-full border border-line-soft bg-well object-cover"
-      />
-    );
-  }
-
-  /* Quiet placeholder frame — a slow-pulsing dark gradient skeleton, play ring, and a whisper of a label */
   return (
-    <div className="relative aspect-video w-full overflow-hidden border border-line-soft bg-well">
-      <motion.div
-        className="absolute inset-0 bg-[linear-gradient(135deg,#060606_0%,#161613_50%,#060606_100%)]"
-        animate={{ opacity: [0.5, 0.9, 0.5] }}
-        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full border border-line transition-all duration-500 group-hover:scale-110 group-hover:border-signal">
-          <span className="ml-0.5 text-[10px] text-dim transition-colors duration-500 group-hover:text-signal">
-            ▶
-          </span>
-        </div>
-      </div>
-      <p className="type-label absolute bottom-3 left-3 text-dim/50">
-        Footage slot
-      </p>
-    </div>
+    <video
+      src={item.videoUrl}
+      poster={item.videoPoster || undefined}
+      controls
+      playsInline
+      className="aspect-video w-full border border-line-soft bg-well object-cover"
+    />
   );
 }
 
 /* ------------------------------------------------------------------ */
-/*  Case-study card                                                    */
+/*  Work card                                                          */
 /*  `size: "large"` items span the full row and lay out video-beside-  */
 /*  text on desktop; `"small"` items stack in half-width columns —     */
 /*  the scale shift is what keeps the grid editorial, not templated.   */
-/*  Metrics still marked "TBD" in work.json stay hidden until real     */
-/*  numbers replace them.                                              */
+/*  Metrics render only when they hold real, defensible numbers —      */
+/*  "TBD" values stay hidden. Spec pieces ship with no metrics at all. */
 /* ------------------------------------------------------------------ */
+type Metric = { value: string; label: string };
+
 function WorkCard({ item, index }: { item: WorkItem; index: number }) {
   const isLarge = item.size === "large";
-  const metrics = item.metrics.filter((m) => m.value !== "TBD");
+  const metrics = (item.metrics as Metric[]).filter((m) => m.value !== "TBD");
 
   const meta = (
     <>
@@ -137,7 +119,14 @@ function WorkCard({ item, index }: { item: WorkItem; index: number }) {
 /* ------------------------------------------------------------------ */
 /*  Section                                                            */
 /* ------------------------------------------------------------------ */
+/* Shared by Nav/Hero to decide whether "#work" is a real destination */
+export const publishedWork = work.items.filter((item) => item.videoUrl);
+
 export default function Work() {
+  /* Nothing published yet → no section. An empty grid of placeholder
+     frames reads as a bluff; absence reads as honesty. */
+  if (publishedWork.length === 0) return null;
+
   return (
     <section id="work" className="border-b border-line">
       <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-32">
@@ -150,7 +139,7 @@ export default function Work() {
 
         {/* Hairline grid: 1px gaps expose the line color underneath */}
         <div className="grid grid-cols-1 gap-px border border-line bg-line md:grid-cols-2">
-          {work.items.map((item, i) => (
+          {publishedWork.map((item, i) => (
             <WorkCard key={item.id} item={item} index={i} />
           ))}
         </div>

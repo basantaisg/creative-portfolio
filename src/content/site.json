@@ -8,7 +8,7 @@
   "location": "Working worldwide, fully remote",
   "email": "basantaparajuli.11@gmail.com",
   "calendly": "https://calendly.com/basantaparajuli-11/30min",
-  "availability": "Accepting 2 new growth partners",
+  "availability": "Open to 2 founding clients",
   "nav": [
     { "label": "Work", "href": "#work" },
     { "label": "Services", "href": "#services" },
@@ -32,8 +32,8 @@
     },
     "secondaryCta": { "label": "See the work", "href": "#work", "external": false },
     "stats": [
-      { "value": "12–15", "label": "Reels shipped / month" },
-      { "value": "48H", "label": "Average turnaround" },
+      { "value": "12–15", "label": "Reels / month capacity" },
+      { "value": "48H", "label": "Turnaround commitment" },
       { "value": "E2E", "label": "Script → edit → ship" },
       { "value": "100%", "label": "Remote, worldwide" }
     ]

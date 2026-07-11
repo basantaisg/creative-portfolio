@@ -15,9 +15,19 @@ import { motion } from "framer-motion";
 import site from "@/content/site.json";
 import HeroCanvas from "@/components/three/HeroCanvas";
 import { MaskReveal, EASE } from "@/components/motion/Reveal";
+import { publishedWork } from "@/components/Work";
 
 export default function Hero() {
   const { hero } = site;
+
+  /* While the Work section is hidden (no published videos yet, see
+     Work.tsx) "#work" is a dead anchor — send "See the work" to
+     Instagram, where the real edits live. Reverts on first publish. */
+  const instagram = site.footer.socials.find((s) => s.label === "Instagram");
+  const secondaryCta =
+    publishedWork.length > 0 || !instagram
+      ? hero.secondaryCta
+      : { ...hero.secondaryCta, href: instagram.href, external: true };
 
   return (
     <section
@@ -75,10 +85,12 @@ export default function Hero() {
               {hero.primaryCta.label} ↗
             </a>
             <a
-              href={hero.secondaryCta.href}
+              href={secondaryCta.href}
+              target={secondaryCta.external ? "_blank" : undefined}
+              rel={secondaryCta.external ? "noopener noreferrer" : undefined}
               className="type-label rounded-full border border-line px-7 py-4 text-center text-bone transition-colors duration-300 hover:border-signal hover:text-signal"
             >
-              {hero.secondaryCta.label}
+              {secondaryCta.label}
             </a>
           </div>
         </motion.div>

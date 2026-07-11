@@ -1,63 +1,53 @@
 {
   "sectionKicker": "Selected Work",
-  "sectionTitle": "Case studies.",
-  "sectionNote": "Cinematic media with a job to do. Every piece below was built against a business objective, whether that's awareness, bookings, or authority.",
+  "sectionTitle": "Spec & concept work.",
+  "sectionNote": "Spec pieces, cut like client work. Every edit below was built against a real business objective — awareness, retention, authority — to show exactly what I'd do with your footage. No invented numbers, no borrowed logos.",
   "items": [
     {
       "id": "bardali-cafe",
       "client": "Bardali Cafe",
-      "objective": "Brand Awareness",
+      "objective": "Spec · Brand Awareness",
       "year": "2026",
       "size": "large",
-      "description": "A cinematic brand-film and reel system that turned a neighborhood cafe into the place everyone had already seen online before they ever walked in.",
+      "description": "Spec edit — a brand-film and reel system for a neighborhood cafe. Scripted and cut to show how I'd make a local spot the place people have already seen online before they walk in. No client brief behind it: this is the pitch.",
       "deliverables": ["Brand film", "Reel system", "Scripting"],
-      "metrics": [
-        { "value": "TBD", "label": "Organic reach" },
-        { "value": "TBD", "label": "Follower growth" }
-      ],
+      "metrics": [],
       "videoUrl": "",
       "videoPoster": ""
     },
     {
       "id": "long-form-work",
       "client": "Long-form Work",
-      "objective": "Depth & Retention",
+      "objective": "Spec · Depth & Retention",
       "year": "2026",
       "size": "large",
-      "description": "Long-form edits built to hold attention past the ten-minute mark. Story structure, pacing, and packaging that turn viewers into an audience.",
+      "description": "Spec edit — long-form structure built to hold attention past the ten-minute mark. Story arc, pacing, and packaging, cut on spec to show what I'd do with a real client's raw footage.",
       "deliverables": ["Long-form edit", "Story structure", "Packaging"],
-      "metrics": [
-        { "value": "TBD", "label": "Avg. watch time" },
-        { "value": "TBD", "label": "Audience retention" }
-      ],
+      "metrics": [],
       "videoUrl": "",
       "videoPoster": ""
     },
     {
       "id": "talking-head-series",
       "client": "Talking-Head Series",
-      "objective": "Authority Building",
+      "objective": "Concept · Authority",
       "year": "2026",
       "size": "small",
-      "description": "Founder-led talking-head episodes cut for retention: pattern interrupts, captions, and pacing that keep watch time up.",
+      "description": "Concept edit — a talking-head system with pattern interrupts, captions, and retention-first pacing. Built to show founders exactly how their episodes would be cut before a single one exists.",
       "deliverables": ["Direction", "Edit system", "Captions"],
-      "metrics": [
-        { "value": "TBD", "label": "Avg. watch time" }
-      ],
+      "metrics": [],
       "videoUrl": "",
       "videoPoster": ""
     },
     {
       "id": "mograph-ad-spots",
       "client": "Motion-Graphics Ad Spots",
-      "objective": "Product Launch",
+      "objective": "Concept · Product Launch",
       "year": "2026",
       "size": "small",
-      "description": "Motion-graphics ad spots for product launches, built with kinetic type, clean transitions, and product-first storytelling graded to sit next to broadcast work.",
+      "description": "Concept edit — motion-graphics ad spots with kinetic type, clean transitions, and product-first storytelling, graded to sit next to broadcast work. Made on spec to show the launch treatment before there's a launch.",
       "deliverables": ["Motion design", "Sound design", "Ad cutdowns"],
-      "metrics": [
-        { "value": "TBD", "label": "Production cost saved" }
-      ],
+      "metrics": [],
       "videoUrl": "",
       "videoPoster": ""
     }

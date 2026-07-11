@@ -21,6 +21,13 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import site from "@/content/site.json";
 import { EASE } from "@/components/motion/Reveal";
+import { publishedWork } from "@/components/Work";
+
+/* The Work section hides itself until a video is published (see
+   Work.tsx) — its anchor link has to disappear with it. */
+const navItems = site.nav.filter(
+  (item) => item.href !== "#work" || publishedWork.length > 0
+);
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
@@ -49,7 +56,7 @@ export default function Nav() {
 
   /* Scrollspy — highlight the nav link whose section is in view */
   useEffect(() => {
-    const sections = site.nav
+    const sections = navItems
       .map((item) => document.querySelector(item.href))
       .filter((el): el is Element => el !== null);
 
@@ -82,7 +89,7 @@ export default function Nav() {
 
           {/* Desktop anchors */}
           <nav className="hidden gap-8 md:flex">
-            {site.nav.map((item) => (
+            {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
@@ -145,7 +152,7 @@ export default function Nav() {
             transition={{ duration: 0.35, ease: EASE }}
           >
             <div className="flex flex-col border-t border-line">
-              {site.nav.map((item, i) => (
+              {navItems.map((item, i) => (
                 <motion.a
                   key={item.href}
                   href={item.href}
